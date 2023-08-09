@@ -13,7 +13,7 @@ function newRoute(method, path, handler, routeTable) {
   return this;
 }
 
-function RouterBuilder(routeTable) {
+function routerBuilder(routeTable) {
   return {
     get: function(path, handler) {
       return newRoute.call(this, 'get', path, handler, routeTable);
@@ -33,9 +33,9 @@ function RouterBuilder(routeTable) {
   };
 }
 
-function Router() {
+function router() {
   const routeTable = {};
-  const builder = new RouterBuilder(routeTable);
+  const builder = new routerBuilder(routeTable);
   return {
     builder: () => builder,
     match: (method, path) => {
@@ -45,4 +45,4 @@ function Router() {
   };
 }
 
-module.exports = Router();
+module.exports = router();

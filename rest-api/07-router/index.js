@@ -47,11 +47,15 @@ const server = http.createServer((req, res) => {
           if (!this.selfStatus) {
             this.status(204);
           }
-          res.send(msg);
+          console.log('Response sent', {
+            status: this.selfStatus,
+            body: msg
+          });
+          res.end(msg);
         },
         json: function (obj)  {
           this.status(200);
-          res.end(JSON.stringify(obj));
+          this.send(JSON.stringify(obj));
         }
       }
     }(res);
@@ -67,12 +71,12 @@ const server = http.createServer((req, res) => {
 
 // declare two handlers
 function helloWorld(req, res) {
-  console.log('Req', req);
+  console.log('Request received', req);
   res.json({'message': 'hello'});
 }
 
 function saySomething(req, res) {  
-  console.log('Req', req);
+  console.log('Request received', req);
   res.json({'return': req.body});
 }
 
